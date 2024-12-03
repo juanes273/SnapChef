@@ -11,7 +11,7 @@ module.exports.getGroqChatCompletion = async (req, res) => {
   }
 
   try {
-    const prompt = `Given the following list of ingredients: ${details}, suggest a set of recipes that can be made using all of these ingredients. Provide the recipe names, ingredients, and step-by-step instructions for each recipe. The recipes should be diverse and suitable for various cooking levels (easy, medium, and hard). Make sure that all ingredients are used in each recipe.`;
+    const prompt = `Given the following list of ingredients: ${details}, suggest a set of recipes that can be made using all of these ingredients. Provide the recipe names, ingredients, and step-by-step instructions for each recipe. The recipes should be diverse and suitable for various cooking levels (easy, medium, and hard). Make sure that all ingredients are used in each recipe`;
 
     const chatCompletion = await groq.chat.completions.create({
       messages: [
