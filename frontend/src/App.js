@@ -1,11 +1,19 @@
 import React, { useState, useRef } from "react";
 
 function App() {
-  const [responseText, setResponseText] = useState(""); // Texto ingresado
-  const [simulatedResult, setSimulatedResult] = useState(""); // Resultado simulado
+  const [responseText, setResponseText] = useState(""); // Texto del textarea
+  const [apiResult, setApiResult] = useState(""); // Resultado de la nueva API
   const [loading, setLoading] = useState(false); // Estado de carga
   const fileInputRef = useRef(null); // Referencia al input de archivo
   const textareaRef = useRef(null); // Referencia al textarea
+
+  // Ajuste dinámico del tamaño del textarea
+  const adjustTextareaHeight = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  };
 
   // Manejo del envío del archivo de imagen
   const handleSubmit = async () => {
@@ -30,36 +38,54 @@ function App() {
 
   // Manejo del clic en el botón de "Traducir"
   const handleTranslate = async () => {
-    setLoading(true);
+    setLoading(true); // Deshabilitamos el botón durante el proceso
+
     try {
+      // Enviamos el texto para traducir al backend
       const response = await fetch("http://localhost:5000/api/translate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ content: responseText }),
+        body: JSON.stringify({ content: responseText }), // Enviamos el texto a traducir
       });
 
       const data = await response.json();
       if (data.content) {
-        setResponseText(data.content);
+        setResponseText(data.content); // Actualizamos el texto traducido en el estado
       } else {
         console.error("Error al traducir el texto");
       }
     } catch (error) {
       console.error("Error al traducir:", error);
     } finally {
-      setLoading(false);
+      setLoading(false); // Restablecemos el estado de carga
     }
   };
 
-  // Función para simular el llamado a una API que devuelve el texto ingresado
-  const handleSimulateAPI = () => {
+  // Llamado a la API "recipie" para procesar el texto ingresado
+  const handleProcessText = async () => {
     setLoading(true);
-    setTimeout(() => {
-      setSimulatedResult(responseText); // Guardamos el resultado en 'simulatedResult'
+    try {
+      const response = await fetch("http://localhost:5000/api/recipie", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content: responseText }), // Enviamos el contenido del texto
+      });
+
+      const data = await response.json();
+      if (data.content) {
+        setApiResult(data.content); // Guardamos el resultado de la API
+      } else {
+        console.error("No se recibió un resultado válido de la API");
+      }
+    } catch (error) {
+      console.error("Error al llamar a la API:", error);
+    } finally {
       setLoading(false);
-    }, 1000); // Simulamos un retardo de 1 segundo
+    }
   };
 
   return (
@@ -75,6 +101,7 @@ function App() {
         ref={textareaRef}
         value={responseText}
         onChange={(e) => setResponseText(e.target.value)}
+        onInput={adjustTextareaHeight} // Ajustamos el tamaño dinámicamente
         style={{
           width: "100%",
           overflow: "hidden",
@@ -100,20 +127,20 @@ function App() {
         {loading ? "Traduciendo..." : "Traducir"}
       </button>
 
-      {/* Botón para simular el llamado a la API */}
+      {/* Botón para procesar texto con la API "recipie" */}
       <button
         style={{
           marginTop: "10px",
           display: "block",
           width: "100%",
         }}
-        onClick={handleSimulateAPI}
+        onClick={handleProcessText}
         disabled={loading}
       >
-        {loading ? "Procesando..." : "Simular API"}
+        {loading ? "Procesando..." : "Procesar Texto"}
       </button>
 
-      {/* Contenedor donde mostramos el resultado simulado */}
+      {/* Contenedor donde mostramos el resultado de la API "recipie" */}
       <div
         style={{
           marginTop: "20px",
@@ -123,8 +150,8 @@ function App() {
           backgroundColor: "#f9f9f9",
         }}
       >
-        <h3>Resultado de recetas</h3>
-        <p>{simulatedResult || "El resultado aparecerá aquí..."}</p>
+        <h3>Resultado de la API "recipie"</h3>
+        <p>{apiResult || "El resultado aparecerá aquí..."}</p>
       </div>
     </div>
   );
