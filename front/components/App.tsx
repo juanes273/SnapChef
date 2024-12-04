@@ -1,4 +1,7 @@
+'use client';
+
 import React, { useState, useRef } from "react";
+import ReactMarkdown from 'react-markdown';
 
 function App() {
   const [responseText, setResponseText] = useState("");
@@ -150,8 +153,10 @@ function App() {
           </div>
 
           <div className="bg-white bg-opacity-20 rounded-md p-4">
-            <h3 className="text-lg font-semibold text-white mb-2">Resultado de la API "recipie"</h3>
-            <p className="text-white">{apiResult || "El resultado aparecerá aquí..."}</p>
+       
+            <ReactMarkdown className="text-white">
+        {apiResult || "El resultado aparecerá aquí..."}
+      </ReactMarkdown>
           </div>
         </div>
       </div>

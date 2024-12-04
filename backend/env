@@ -1,0 +1,3 @@
+MONGO_URI = mongodb+srv://notenow:notenow@cluster0.gpn9cxb.mongodb.net/NOTENOW?retryWrites=true&w=majority&appName=Cluster0
+JWT_SECRET_KEY = NOTENOW
+LLAMAKEY = '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'
