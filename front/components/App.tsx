@@ -126,12 +126,12 @@ export default function ImageProcessor() {
           transition={{ duration: 0.5 }}
           className="bg-blue-500 bg-opacity-60 backdrop-filter backdrop-blur-lg rounded-xl shadow-lg p-8 max-w-2xl w-full"
         >
-          <h1 className="text-4xl font-bold text-white mb-8 text-center">Procesador de Imágenes y Texto</h1>
+          <h1 className="text-4xl font-bold text-white mb-8 text-center">¡Sube tu plato!</h1>
           
           <div className="space-y-6">
             <div>
               <label htmlFor="file-upload" className="block text-sm font-medium text-white mb-2">
-                Subir Imagen
+                Subir Imagen de Comida
               </label>
               <div className="flex items-center space-x-4">
                 <input
@@ -166,7 +166,7 @@ export default function ImageProcessor() {
 
             <div>
               <label htmlFor="text-input" className="block text-sm font-medium text-white mb-2">
-                Texto
+                
               </label>
               <textarea
                 id="text-input"
@@ -174,7 +174,7 @@ export default function ImageProcessor() {
                 value={responseText}
                 onChange={(e) => setResponseText(e.target.value)}
                 className="w-full bg-white bg-opacity-20 rounded-md p-3 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-300"
-                placeholder="Escribe algo aquí..."
+                placeholder=""
                 rows={4}
               />
             </div>
