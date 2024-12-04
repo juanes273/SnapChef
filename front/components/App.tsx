@@ -124,7 +124,7 @@ export default function ImageProcessor() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-blue-500 bg-opacity-60 backdrop-filter backdrop-blur-lg rounded-xl shadow-lg p-8 max-w-2xl w-full"
+          className="bg-gray-500 bg-opacity-60 backdrop-filter backdrop-blur-lg rounded-xl shadow-lg p-8 max-w-2xl w-full"
         >
           <h1 className="text-4xl font-bold text-white mb-8 text-center">¡Sube tu plato!</h1>
           
@@ -156,7 +156,7 @@ export default function ImageProcessor() {
                   whileTap={{ scale: 0.95 }}
                   onClick={handleSubmit}
                   disabled={loading}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300 disabled:opacity-50 flex items-center space-x-2"
+                  className="px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition duration-300 disabled:opacity-50 flex items-center space-x-2"
                 >
                   <ImageIcon size={18} />
                   <span>{loading ? "Procesando..." : "Subir Imagen"}</span>
@@ -185,7 +185,7 @@ export default function ImageProcessor() {
                 whileTap={{ scale: 0.95 }}
                 onClick={handleTranslate}
                 disabled={loading}
-                className="flex-1 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 disabled:opacity-50 flex items-center justify-center space-x-2"
+                className="flex-1 px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition duration-300 disabled:opacity-50 flex items-center justify-center space-x-2"
               >
                 <Translate size={18} />
                 <span>{loading ? "Traduciendo..." : "Traducir"}</span>
@@ -195,7 +195,7 @@ export default function ImageProcessor() {
                 whileTap={{ scale: 0.95 }}
                 onClick={handleProcessText}
                 disabled={loading}
-                className="flex-1 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 disabled:opacity-50 flex items-center justify-center space-x-2"
+                className="flex-1 px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition duration-300 disabled:opacity-50 flex items-center justify-center space-x-2"
               >
                 <FileText size={18} />
                 <span>{loading ? "Procesando..." : "Procesar Texto"}</span>
